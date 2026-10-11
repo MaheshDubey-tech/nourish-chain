@@ -28,7 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve frontend static assets (for local standalone server)
+// Serve frontend static assets (from public folder and root)
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname)));
 
 // ==========================================
