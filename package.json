@@ -1,0 +1,25 @@
+{
+  "name": "nourish-chain",
+  "version": "1.0.0",
+  "description": "Smart food donation and cold-storage network platform with FEFO expiry-priority dispatch",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node db/seed.js"
+  },
+  "keywords": [
+    "food-rescue",
+    "ngo",
+    "cold-storage",
+    "fefo",
+    "sustainability",
+    "zero-waste"
+  ],
+  "author": "Mahesh Dubey",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

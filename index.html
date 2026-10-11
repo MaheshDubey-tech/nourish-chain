@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NourishChain | Smart Food Donation & Cold-Storage Network</title>
+  <meta name="description" content="Intelligent surplus food rescue platform connecting donors, NGOs, and temperature-controlled cold storages with FEFO (First-Expired-First-Out) priority dispatch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+  <!-- Top Urgency Alert Ribbon -->
+  <div class="urgent-ticker-banner" id="urgentBanner">
+    <div class="banner-inner container">
+      <span class="ticker-badge"><span class="pulse-dot"></span> CRITICAL FEFO DISPATCH</span>
+      <p class="ticker-text" id="tickerUrgentText">
+        <strong>120 Packaged Meals</strong> expiring in <strong>1h 45m</strong> at Downtown Hotel Hub — NGO Van #4 dispatched!
+      </p>
+      <button class="banner-close" id="closeBannerBtn" aria-label="Dismiss banner">&times;</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-wrap">
+      <a href="#" class="brand-logo" id="brandLogo">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10a10 10 0 0 1-10-10A10 10 0 0 1 12 2z"></path>
+            <path d="M12 6v6l4 2"></path>
+            <path d="M7 16h10"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Nourish<span class="highlight">Chain</span></span>
+          <span class="brand-tag">NGO Cold-Chain Rescue</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="mainNav">
+        <a href="#fefo-queue" class="nav-link active">FEFO Dispatch Queue</a>
+        <a href="#cold-network" class="nav-link">Cold Storage Hubs</a>
+        <a href="#ngos" class="nav-link">Partner NGOs</a>
+        <a href="#impact" class="nav-link">Impact Metrics</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark/light mode" title="Toggle Theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="btn btn-outline" id="quickFindHubBtn">Find Nearest Hub</button>
+        <button class="btn btn-primary" id="openDonateModalBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Donate Food
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Live Stats -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <span class="pill-dot"></span> Zero Food Waste • Smart Expiry Logistics
+        </div>
+        <h1 class="hero-title">
+          Donate Food with <span class="gradient-text">Expiry Priority</span> & Cold-Storage Protection.
+        </h1>
+        <p class="hero-desc">
+          Surplus meals shouldn't spoil while people go hungry. NourishChain automatically routes food by <strong>First-Expired-First-Out (FEFO)</strong> priority, reserving temperature-controlled cold lockers to keep fresh food edible until NGOs deliver.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary btn-lg" id="heroDonateBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            Make a Food Donation
+          </button>
+          <a href="#cold-network" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Explore Cold Storage Hubs
+          </a>
+        </div>
+
+        <div class="hero-trust-badges">
+          <div class="trust-item">
+            <span class="check-icon">✓</span>
+            <span>Verified NGOs Only</span>
+          </div>
+          <div class="trust-item">
+            <span class="check-icon">✓</span>
+            <span>Food Safety Verified (FSSAI/FDA)</span>
+          </div>
+          <div class="trust-item">
+            <span class="check-icon">✓</span>
+            <span>IoT Cold-Chain Monitored</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Interactive Quick-Rescue Status Panel -->
+      <div class="hero-panel-card">
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <span class="live-indicator"><span class="ping"></span>LIVE</span>
+            <h3>Cold-Chain & Rescue Radar</h3>
+          </div>
+          <span class="badge badge-soft" id="activePingsCount">14 Active Nodes</span>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="stat-mini">
+            <span class="stat-num" id="statMealsToday">3,480</span>
+            <span class="stat-label">Meals Rescued Today</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-num text-success" id="statAvgDispatch">32 min</span>
+            <span class="stat-label">Avg Pickup Time</span>
+          </div>
+          <div class="stat-mini">
+            <span class="stat-num text-primary" id="statColdCapacity">82%</span>
+            <span class="stat-label">Cold Storage Free</span>
+          </div>
+        </div>
+
+        <div class="radar-urgent-preview">
+          <div class="preview-head">
+            <span class="head-label">Top Expiry Urgency in Queue</span>
+            <span class="badge badge-urgent" id="heroUrgentBadge">45m REMAINING</span>
+          </div>
+          <div class="urgent-item-mini" id="heroUrgentItem">
+            <div class="urgent-item-icon">🍱</div>
+            <div class="urgent-item-info">
+              <strong>Fresh Biryani & Curry Trays (85 Portions)</strong>
+              <span>Hyatt Regency Banquet • Assigned to Robin Hood Army</span>
+            </div>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-label">
+              <span>Time to Expiry Window</span>
+              <span class="text-danger font-mono" id="heroCountdownTimer">00:44:18</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill fill-urgent" style="width: 82%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel-footer">
+          <div class="footer-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span>Auto-routed to the nearest shelter under 4km</span>
+          </div>
+          <a href="#fefo-queue" class="panel-link">View Full Queue &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Expiry Priority System & FEFO Real-Time Dispatch -->
+  <section class="section-container" id="fefo-queue">
+    <div class="container">
+      <div class="section-header">
+        <div class="header-pretitle">Smart First-Expired-First-Out (FEFO) Protocol</div>
+        <h2 class="section-title">Live Expiry-Prioritized Food Queue</h2>
+        <p class="section-subtitle">
+          Food is automatically arranged by strict expiry countdowns. Perishable cooked dishes are prioritized for emergency courier dispatch, while items with safe cold-chain preservation are allocated to nearby chillers.
+        </p>
+      </div>
+
+      <!-- Priority Filter & Search Bar -->
+      <div class="filter-toolbar">
+        <div class="filter-pills" id="priorityFilters">
+          <button class="filter-btn active" data-filter="all">All Donations (<span id="countAll">0</span>)</button>
+          <button class="filter-btn filter-critical" data-filter="critical">
+            <span class="dot dot-critical"></span> Critical (&lt;4h) (<span id="countCritical">0</span>)
+          </button>
+          <button class="filter-btn filter-high" data-filter="high">
+            <span class="dot dot-high"></span> Urgent (4-12h) (<span id="countHigh">0</span>)
+          </button>
+          <button class="filter-btn filter-moderate" data-filter="moderate">
+            <span class="dot dot-moderate"></span> Moderate (&gt;12h) (<span id="countModerate">0</span>)
+          </button>
+          <button class="filter-btn" data-filter="cold_stored">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            In Cold Storage (<span id="countCold">0</span>)
+          </button>
+        </div>
+
+        <div class="filter-controls">
+          <div class="search-input-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="foodSearchInput" placeholder="Search food, location, donor...">
+          </div>
+          <select id="foodCategorySelect" class="styled-select" aria-label="Category filter">
+            <option value="all">All Categories</option>
+            <option value="Cooked Meals">Cooked Meals</option>
+            <option value="Bakery & Bread">Bakery & Bread</option>
+            <option value="Dairy & Milk">Dairy & Milk</option>
+            <option value="Fruits & Veggies">Fresh Produce</option>
+            <option value="Packaged / Dry">Packaged Goods</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Live Cards Grid for Food Donations -->
+      <div class="donation-grid" id="donationCardsGrid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Quick Add Prompt Bar -->
+      <div class="empty-state-card" id="emptyState" style="display: none;">
+        <div class="empty-icon">🥗</div>
+        <h3>No food donations match your current filter</h3>
+        <p>Try resetting the search or filter to view other active surplus food listings.</p>
+        <button class="btn btn-outline" id="resetFilterBtn">Reset Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Temperature-Controlled Cold Storage Network -->
+  <section class="section-container bg-surface" id="cold-network">
+    <div class="container">
+      <div class="section-header">
+        <div class="header-pretitle">Safe Preservation Infrastructure</div>
+        <h2 class="section-title">Verified Cold Storage Hubs & Lockers</h2>
+        <p class="section-subtitle">
+          Don't let perishable food spoil if an NGO cannot pick up immediately. Drop your donations at any of our partner cold rooms and solar-powered chiller lockers. Real-time temperature & available capacity monitored 24/7.
+        </p>
+      </div>
+
+      <!-- Cold Storage Interactive Map/Locator Simulator -->
+      <div class="cold-hub-layout">
+        <div class="cold-hub-list" id="coldHubList">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Interactive Hub Detail & Live Telemetry Inspector -->
+        <div class="cold-hub-telemetry-panel" id="hubTelemetryPanel">
+          <div class="telemetry-card">
+            <div class="telemetry-header">
+              <div>
+                <span class="badge badge-success">IoT TELEMETRY ONLINE</span>
+                <h3 id="activeHubName">Metro Central Cold Vault #1</h3>
+                <p id="activeHubAddress" class="text-muted">45 Terminal Road, Sector 3 • 2.1 km away</p>
+              </div>
+              <div class="hub-status-pill">
+                <span class="live-dot green"></span> Open 24/7
+              </div>
+            </div>
+
+            <!-- Temperature & Humidity Gauges -->
+            <div class="gauges-grid">
+              <div class="gauge-box">
+                <div class="gauge-label">Chiller Zone (Dairy/Produce)</div>
+                <div class="gauge-val" id="telemetryTempChilled">3.4°C</div>
+                <div class="gauge-target">Target: 2°C – 5°C <span class="badge-status ok">Optimal</span></div>
+              </div>
+              <div class="gauge-box">
+                <div class="gauge-label">Deep Freeze (Meats/Cooked)</div>
+                <div class="gauge-val" id="telemetryTempFreeze">-18.2°C</div>
+                <div class="gauge-target">Target: &lt; -15°C <span class="badge-status ok">Optimal</span></div>
+              </div>
+              <div class="gauge-box">
+                <div class="gauge-label">Ambient Dry Section</div>
+                <div class="gauge-val" id="telemetryHumidity">62% RH</div>
+                <div class="gauge-target">Controlled Humidity</div>
+              </div>
+            </div>
+
+            <!-- Capacity Breakdown -->
+            <div class="capacity-visual-wrap">
+              <div class="cap-header">
+                <strong>Capacity Allocation</strong>
+                <span id="activeHubCapacityText">260 kg / 400 kg occupied (65%)</span>
+              </div>
+              <div class="multi-progress-bar">
+                <div class="progress-segment occupied" id="activeHubProgressOccupied" style="width: 65%;" title="Occupied (65%)"></div>
+                <div class="progress-segment reserved" id="activeHubProgressReserved" style="width: 15%;" title="Reserved for NGO (15%)"></div>
+                <div class="progress-segment free" id="activeHubProgressFree" style="width: 20%;" title="Available (20%)"></div>
+              </div>
+              <div class="capacity-legend">
+                <span><span class="leg-color occupied"></span> Occupied (260 kg)</span>
+                <span><span class="leg-color reserved"></span> In-Transit Transit (60 kg)</span>
+                <span><span class="leg-color free"></span> Available Now (80 kg)</span>
+              </div>
+            </div>
+
+            <!-- Stored Items in this Hub -->
+            <div class="hub-inventory-section">
+              <h4>Currently Stored Food Ready for NGO Pickup</h4>
+              <ul class="hub-item-list" id="hubInventoryList">
+                <!-- Dynamically loaded -->
+              </ul>
+            </div>
+
+            <!-- Actions -->
+            <div class="hub-actions-footer">
+              <button class="btn btn-primary" id="reserveLockerBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10a10 10 0 0 1-10-10A10 10 0 0 1 12 2z"></path><path d="M12 8v8m-4-4h8"></path></svg>
+                Book Drop-off Locker Space
+              </button>
+              <button class="btn btn-outline" id="getDirectionsBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                Directions & Gate Access
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Partner NGO & Verified Shelters Matchboard -->
+  <section class="section-container" id="ngos">
+    <div class="container">
+      <div class="section-header">
+        <div class="header-pretitle">Beneficiary Network</div>
+        <h2 class="section-title">Verified NGO Distribution Partners</h2>
+        <p class="section-subtitle">
+          Over 64+ non-profits, mobile soup kitchens, and orphanages are connected to our dispatch algorithm to collect food based on urgent dietary requirements and proximity.
+        </p>
+      </div>
+
+      <div class="ngo-grid" id="ngoGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Live Impact & Carbon Calculator -->
+  <section class="section-container bg-surface" id="impact">
+    <div class="container">
+      <div class="impact-wrap">
+        <div class="impact-left">
+          <span class="badge badge-primary">PLANETARY & SOCIAL IMPACT</span>
+          <h2 class="impact-title">Food Rescue = Hunger Relief + Climate Action</h2>
+          <p class="impact-desc">
+            When surplus food rots in landfills, it emits dangerous methane gas. Storing food at regulated cold temperatures and dispatching in order of expiry keeps carbon emissions out of the atmosphere while nourishing communities.
+          </p>
+
+          <!-- Interactive Calculator -->
+          <div class="calculator-box">
+            <h4>Calculate Your Donation Impact</h4>
+            <div class="slider-group">
+              <div class="slider-header">
+                <span>Food Quantity to Donate</span>
+                <span class="slider-value" id="calcSliderVal">50 kg (approx. 110 meals)</span>
+              </div>
+              <input type="range" id="impactSlider" min="5" max="500" value="50" step="5" class="custom-range" aria-label="Donation quantity in kg">
+            </div>
+
+            <div class="calc-results-grid">
+              <div class="calc-card">
+                <div class="calc-icon">🍲</div>
+                <div class="calc-metric" id="calcMealsOut">110</div>
+                <div class="calc-metric-lbl">People Fed Today</div>
+              </div>
+              <div class="calc-card">
+                <div class="calc-icon">🌱</div>
+                <div class="calc-metric" id="calcCo2Out">125 kg</div>
+                <div class="calc-metric-lbl">CO₂e Emissions Prevented</div>
+              </div>
+              <div class="calc-card">
+                <div class="calc-icon">💧</div>
+                <div class="calc-metric" id="calcWaterOut">42,500 L</div>
+                <div class="calc-metric-lbl">Virtual Water Saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="impact-right">
+          <div class="cumulative-counter-card">
+            <h3>NourishChain Cumulative Totals</h3>
+            <div class="cum-stat">
+              <span class="cum-num">184,920 kg</span>
+              <span class="cum-desc">Quality food rescued from landfill disposal</span>
+            </div>
+            <div class="cum-stat">
+              <span class="cum-num">412,000+</span>
+              <span class="cum-desc">Wholesome meals served to under-resourced families</span>
+            </div>
+            <div class="cum-stat">
+              <span class="cum-num">462 Tons</span>
+              <span class="cum-desc">Greenhouse gases mitigated via cold-chain preservation</span>
+            </div>
+            <div class="cum-badge-quote">
+              "Thanks to NourishChain's expiry ranking, 99.1% of all catered food reaches our evening soup kitchens while still warm and microbiologically safe."
+              <strong>— Ritu Sharma, Feeding India Alliance</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step by Step How It Works -->
+  <section class="section-container">
+    <div class="container">
+      <div class="section-header text-center">
+        <div class="header-pretitle">End-To-End Integrity</div>
+        <h2 class="section-title">How Our Cold-Chain Food Rescue Works</h2>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon">📝</div>
+          <h4>List Food & Expiry</h4>
+          <p>Donors specify food type, preparation time, and shelf-life. Our algorithm sets an automated FEFO urgency level.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon">⚡</div>
+          <h4>Smart Routing Decision</h4>
+          <p>If expiry is under 4h, an emergency NGO van is pinged instantly. If longer, space is reserved in the nearest cold locker.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon">❄️</div>
+          <h4>Cold Storage Drop-off</h4>
+          <p>Donors self-drop at IoT-monitored chilled lockers using a digital QR code, preventing temperature abuse.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon">🚚</div>
+          <h4>FEFO Timed Distribution</h4>
+          <p>NGOs withdraw items with the nearest expiry first, ensuring zero spoilage and 100% dignified meal delivery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10a10 10 0 0 1-10-10A10 10 0 0 1 12 2z"></path><path d="M12 6v6l4 2"></path></svg>
+          </div>
+          <span class="brand-name">Nourish<span class="highlight">Chain</span></span>
+        </div>
+        <p class="footer-tagline">
+          Empowering communities and NGOs with smart cold-chain logistics, expiry-based priority dispatch, and zero food waste.
+        </p>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Platform</h4>
+        <a href="#fefo-queue">FEFO Priority Queue</a>
+        <a href="#cold-network">Cold Hub Locator</a>
+        <a href="#ngos">NGO Directory</a>
+        <a href="#impact">Carbon Metrics</a>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Food Safety</h4>
+        <a href="#food-guidelines" id="guidelinesLink">Packaging Guidelines</a>
+        <a href="#temp-rules" id="tempRulesLink">Temperature Standards</a>
+        <a href="#fssai">FSSAI Compliance</a>
+        <a href="#legal">Good Samaritan Act</a>
+      </div>
+
+      <div class="footer-cta">
+        <h4>Need Emergency Surplus Rescue?</h4>
+        <p>Are you a wedding venue, banquet, or hotel with 100+ surplus portions right now?</p>
+        <button class="btn btn-urgent" id="emergencyCallBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          24/7 Food Rescue Hotline
+        </button>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 NourishChain Open Initiative. Built for humanitarian NGOs and responsible food donors.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL: DONATE FOOD FORM (Smart Expiry & Cold Storage Booking) -->
+  <div class="modal-backdrop" id="donateModalBackdrop" style="display: none;">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-primary">FOOD RESCUE SUBMISSION</span>
+          <h2 id="modalTitle">Donate Surplus Food</h2>
+        </div>
+        <button class="modal-close-btn" id="closeDonateModalBtn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="foodDonationForm" class="modal-form">
+        <!-- Step 1: Food Basics -->
+        <div class="form-section">
+          <h3 class="form-section-title">1. What food are you donating?</h3>
+          <div class="form-group">
+            <label for="foodTitleInput">Food Item Description *</label>
+            <input type="text" id="foodTitleInput" placeholder="e.g. 50 Trays Steamed Rice & Dal Makhani" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="foodCategoryInput">Category *</label>
+              <select id="foodCategoryInput" required>
+                <option value="">Select Category</option>
+                <option value="Cooked Meals">Cooked Meals (Warm / Catering)</option>
+                <option value="Dairy & Milk">Dairy, Paneer & Milk</option>
+                <option value="Bakery & Bread">Bakery, Bread & Confectionery</option>
+                <option value="Fruits & Veggies">Fresh Fruits & Vegetables</option>
+                <option value="Packaged / Dry">Packaged Grains & Canned</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="foodQuantityInput">Estimated Quantity *</label>
+              <input type="text" id="foodQuantityInput" placeholder="e.g. 40 kg or 85 portions" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Critical Expiry & Storage Window -->
+        <div class="form-section">
+          <div class="section-title-wrap">
+            <h3 class="form-section-title">2. Expiry & Temperature Requirements</h3>
+            <span class="badge badge-urgent">FEFO DRIVEN</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prepTimeInput">Cooked / Prepared When? *</label>
+              <select id="prepTimeInput" required>
+                <option value="Just now (Within 1 hour)">Just now (Within 1 hour)</option>
+                <option value="2-3 hours ago">2-3 hours ago</option>
+                <option value="Earlier today (4-6 hours ago)">Earlier today (4-6 hours ago)</option>
+                <option value="Yesterday (stored refrigerated)">Yesterday (Stored refrigerated)</option>
+                <option value="Packaged / Long shelf-life">Packaged / Long shelf-life</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="shelfLifeInput">Safe to Consume For (Hours Left) *</label>
+              <select id="shelfLifeInput" required>
+                <option value="2">Less than 3 hours (CRITICAL - Immediate Eat)</option>
+                <option value="5" selected>4 - 6 hours (High Priority)</option>
+                <option value="12">8 - 12 hours (Needs Chilling)</option>
+                <option value="24">24 hours (Refrigerated Cold-Chain)</option>
+                <option value="72">3+ days (Frozen or Packaged)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Urgency Indicator Box -->
+          <div class="urgency-calc-preview" id="formUrgencyPreview">
+            <div class="urgency-preview-icon" id="formUrgencyIcon">⚡</div>
+            <div class="urgency-preview-text">
+              <strong id="formUrgencyTitle">High Priority Expiry (<span id="formUrgencyHours">5</span> Hours Left)</strong>
+              <p id="formUrgencyAdvice">
+                Recommended for chilled storage drop-off or NGO express van pickup.
+              </p>
+            </div>
+            <span class="badge badge-warning" id="formUrgencyBadge">PRIORITY #2</span>
+          </div>
+
+          <div class="form-group">
+            <label>Storage Temperature Requirement *</label>
+            <div class="storage-radio-group">
+              <label class="storage-card-option">
+                <input type="radio" name="storageType" value="chilled" checked>
+                <div class="option-content">
+                  <span class="option-icon">❄️</span>
+                  <strong>Chilled (2°C - 5°C)</strong>
+                  <span>Refrigerated / Dairy / Cooked</span>
+                </div>
+              </label>
+              <label class="storage-card-option">
+                <input type="radio" name="storageType" value="frozen">
+                <div class="option-content">
+                  <span class="option-icon">🧊</span>
+                  <strong>Deep Freeze (&lt; -15°C)</strong>
+                  <span>Frozen curries, raw meats, ice</span>
+                </div>
+              </label>
+              <label class="storage-card-option">
+                <input type="radio" name="storageType" value="ambient">
+                <div class="option-content">
+                  <span class="option-icon">📦</span>
+                  <strong>Ambient (Dry Pantry)</strong>
+                  <span>Rice, grains, breads, apples</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Fulfillment & Location -->
+        <div class="form-section">
+          <h3 class="form-section-title">3. Logistics & Nearest Cold Storage</h3>
+          <div class="form-group">
+            <label>Delivery Method *</label>
+            <div class="fulfillment-options">
+              <label class="radio-label">
+                <input type="radio" name="fulfillType" value="dropoff" checked>
+                <span><strong>I will Drop Off</strong> at nearest Cold Storage Hub (Fastest, zero wait)</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="fulfillType" value="pickup">
+                <span><strong>Request NGO Pickup Van</strong> (Subject to volunteer van availability)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="donorLocationInput">Pickup / Donor Address *</label>
+              <input type="text" id="donorLocationInput" placeholder="Street, Hotel Name, Area" required>
+            </div>
+            <div class="form-group">
+              <label for="coldStorageChoice">Allocate to Cold Hub *</label>
+              <select id="coldStorageChoice" required>
+                <option value="hub1">Metro Central Cold Vault #1 (2.1 km - 35% free)</option>
+                <option value="hub2">Greenfield Solar Cold Unit #4 (3.8 km - 50% free)</option>
+                <option value="hub3">Eastside Community Deep-Freeze (5.2 km - 80% free)</option>
+                <option value="hub4">Aerocity Rapid Intake Chiller (1.4 km - 22% free)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="donorNameInput">Your Name / Organization *</label>
+              <input type="text" id="donorNameInput" placeholder="e.g. Grand Banquet Hall / Rahul Sharma" required>
+            </div>
+            <div class="form-group">
+              <label for="donorPhoneInput">Contact Phone *</label>
+              <input type="tel" id="donorPhoneInput" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="hygieneCheck" required>
+              <span>I certify this food is freshly prepared, hygienically sealed, and safe for human consumption under standard safety guidelines.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancelDonateBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="submitDonationBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Publish to FEFO Dispatch
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Claim Modal for Volunteers / NGOs -->
+  <div class="modal-backdrop" id="claimModalBackdrop" style="display: none;">
+    <div class="modal-dialog modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-success">DISPATCH ALLOCATION</span>
+          <h3>Claim Food Donation</h3>
+        </div>
+        <button class="modal-close-btn" id="closeClaimModalBtn">&times;</button>
+      </div>
+      <div class="modal-body-pad">
+        <p>You are reserving this food parcel for distribution:</p>
+        <div class="claim-summary-card" id="claimSummary">
+          <!-- Filled by JS -->
+        </div>
+
+        <form id="claimForm">
+          <div class="form-group">
+            <label for="claimNgoSelect">Select Claiming NGO / Volunteer Group *</label>
+            <select id="claimNgoSelect" required>
+              <option value="Robin Hood Army - Central Chapter">Robin Hood Army - Central Chapter</option>
+              <option value="Feeding India Feeding Smiles">Feeding India Smiles Network</option>
+              <option value="Annam Relief Foundation">Annam Relief Foundation</option>
+              <option value="Shelter Home For Children">Shelter Home For Children</option>
+              <option value="Community Kitchen Collective">Community Kitchen Collective</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dispatchEta">Estimated Pickup Time *</label>
+            <select id="dispatchEta" required>
+              <option value="Within 20 minutes (Express Van)">Within 20 minutes (Express Van)</option>
+              <option value="Within 45 minutes">Within 45 minutes</option>
+              <option value="Within 1.5 hours">Within 1.5 hours</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Confirm & Assign Dispatch Van</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cold Locker Reservation Modal -->
+  <div class="modal-backdrop" id="reserveModalBackdrop" style="display: none;">
+    <div class="modal-dialog modal-sm" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-primary">COLD LOCKER SECURED</span>
+          <h3>Locker Pass & Passcode</h3>
+        </div>
+        <button class="modal-close-btn" id="closeReserveModalBtn">&times;</button>
+      </div>
+      <div class="modal-body-pad text-center">
+        <div class="qr-code-placeholder">
+          <div class="fake-qr">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+              <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              <line x1="17" y1="7" x2="17.01" y2="7"></line>
+              <line x1="7" y1="17" x2="7.01" y2="17"></line>
+              <line x1="10" y1="14" x2="10" y2="17"></line>
+              <line x1="14" y1="10" x2="17" y2="10"></line>
+            </svg>
+          </div>
+          <span class="qr-code-text" id="reservePasscode">LOCKER #C-14 • PIN: 8392</span>
+        </div>
+        <h4 id="reserveHubTitle">Metro Central Cold Vault #1</h4>
+        <p class="text-muted text-sm">Chilled Compartment (3.4°C) reserved for 4 hours. Tap this PIN on the facility terminal or scan QR for contactless gate entry.</p>
+        <button class="btn btn-outline w-100 mt-3" id="doneReserveBtn">Done & Copy Code</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
