@@ -1,6 +1,6 @@
 /**
  * NourishChain - Express Backend Server
- * REST API Endpoints & Static File Server
+ * Compatible with both standalone Node.js and Vercel Serverless Functions
  */
 
 const express = require('express');
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve frontend static assets
+// Serve frontend static assets (for local standalone server)
 app.use(express.static(path.join(__dirname)));
 
 // ==========================================
@@ -42,7 +42,8 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     engine: 'NourishChain Backend v1.0',
-    db: 'SQLite (node:sqlite WAL)',
+    environment: process.env.VERCEL ? 'Vercel Serverless' : 'Standalone Node.js',
+    db: repository.engineName || 'SQLite/Memory Store',
     timestamp: new Date().toISOString()
   });
 });
@@ -250,16 +251,23 @@ app.get('/api/metrics', (req, res) => {
   }
 });
 
-// Fallback to index.html for SPA routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// Fallback to index.html for SPA routes (only in standalone mode)
+if (!process.env.VERCEL) {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+}
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`====================================================`);
-  console.log(`🚀 NourishChain Backend running at http://localhost:${PORT}`);
-  console.log(`📦 Database: SQLite (WAL mode active at db/nourish_chain.sqlite)`);
-  console.log(`⚡ FEFO Dispatch API ready`);
-  console.log(`====================================================`);
-});
+// Start Server when run directly as main module
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`====================================================`);
+    console.log(`🚀 NourishChain Backend running at http://localhost:${PORT}`);
+    console.log(`📦 Database: ${repository.engineName}`);
+    console.log(`⚡ FEFO Dispatch API ready`);
+    console.log(`====================================================`);
+  });
+}
+
+// Export for Vercel Serverless Function
+module.exports = app;

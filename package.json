@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js",
-    "seed": "node db/seed.js"
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "keywords": [
     "food-rescue",
@@ -14,7 +16,8 @@
     "cold-storage",
     "fefo",
     "sustainability",
-    "zero-waste"
+    "zero-waste",
+    "vercel"
   ],
   "author": "Mahesh Dubey",
   "license": "MIT",
